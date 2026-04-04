@@ -4,7 +4,8 @@
   <a href="/items" class="text-sm text-gray-500 hover:text-gray-700 transition">&larr; Back to items</a>
 </div>
 
-<div class="bg-white rounded-xl border border-gray-200 shadow-sm p-8 max-w-2xl mx-auto">  <h1 class="text-2xl font-semibold text-gray-900 mb-6">
+<div class="bg-white rounded-xl border border-gray-200 shadow-sm p-8 max-w-2xl mx-auto">
+  <h1 class="text-2xl font-semibold text-gray-900 mb-6">
     <%= item ? 'Edit item' : 'New item' %>
   </h1>
 
@@ -68,15 +69,21 @@
       </div>
     </div>
 
-    <div class="flex gap-3 pt-2">
-      <button type="submit"
-        class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium px-6 py-2 rounded-lg transition">
-        <%= item ? 'Save changes' : 'Create item' %>
-      </button>
-      <a href="/items"
-        class="text-sm font-medium px-6 py-2 rounded-lg border border-gray-200 hover:bg-gray-50 transition">
-        Cancel
-      </a>
+    <div class="border-t border-gray-100 pt-5 mt-2">
+      <label class="block text-sm font-medium text-gray-700 mb-1">Admin password</label>
+      <input type="password" name="admin_password" required
+        placeholder="Required to save changes"
+        class="w-full border border-gray-200 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4">
+      <div class="flex gap-3">
+        <button type="submit"
+          class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium px-6 py-2 rounded-lg transition">
+          <%= item ? 'Save changes' : 'Create item' %>
+        </button>
+        <a href="/items"
+          class="text-sm font-medium px-6 py-2 rounded-lg border border-gray-200 hover:bg-gray-50 transition">
+          Cancel
+        </a>
+      </div>
     </div>
 
   </form>
