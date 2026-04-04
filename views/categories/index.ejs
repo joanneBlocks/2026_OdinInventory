@@ -1,36 +1,48 @@
 <%- include('../partials/header') %>
 
-<h1>Categories</h1>
-<a href="/categories/new">+ New category</a>
+<div class="flex items-center justify-between mb-6">
+  <h1 class="text-2xl font-semibold text-gray-900">Categories</h1>
+  <a href="/categories/new"
+     class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium px-4 py-2 rounded-lg transition">
+    + New category
+  </a>
+</div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% categories.forEach(category => { %>
-      <tr>
-        <td>
-          <a href="/categories/<%= category.id %>">
-            <%= category.name %>
-          </a>
-        </td>
-        <td><%= category.description || '—' %></td>
-        <td>
-          <a href="/categories/<%= category.id %>/edit">Edit</a>
-          <form action="/categories/<%= category.id %>/delete" method="POST"
-            style="display:inline"
-            onsubmit="return confirm('Are you sure you want to delete <%= category.name %>?')">
-            <button type="submit">Delete</button>
-          </form>
-        </td>
+<div class="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+  <table class="w-full text-sm">
+    <thead>
+      <tr class="bg-gray-50 border-b border-gray-200 text-left text-gray-500 uppercase tracking-wide text-xs">
+        <th class="px-5 py-3">Name</th>
+        <th class="px-5 py-3">Description</th>
+        <th class="px-5 py-3"></th>
       </tr>
-    <% }) %>
-  </tbody>
-</table>
+    </thead>
+    <tbody class="divide-y divide-gray-100">
+      <% categories.forEach(category => { %>
+        <tr class="hover:bg-gray-50 transition">
+          <td class="px-5 py-4 font-medium">
+            <a href="/categories/<%= category.id %>"
+               class="text-blue-600 hover:underline">
+              <%= category.name %>
+            </a>
+          </td>
+          <td class="px-5 py-4 text-gray-600"><%= category.description || '—' %></td>
+          <td class="px-5 py-4 text-right flex items-center justify-end gap-3">
+            <a href="/categories/<%= category.id %>/edit"
+               class="text-gray-500 hover:text-gray-900 text-sm transition">Edit</a>
+            <form action="/categories/<%= category.id %>/delete" method="POST"
+              style="display:inline"
+              onsubmit="return confirm('Are you sure you want to delete <%= category.name %>?')">
+              <button type="submit"
+                class="text-red-500 hover:text-red-700 text-sm transition">
+                Delete
+              </button>
+            </form>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
 
 <%- include('../partials/footer') %>
