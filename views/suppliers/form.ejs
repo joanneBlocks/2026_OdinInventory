@@ -1,0 +1,29 @@
+<%- include('../partials/header') %>
+
+<a href="/suppliers">&larr; Back</a>
+<h1><%= supplier ? 'Edit supplier' : 'New supplier' %></h1>
+
+<form action="<%= supplier ? `/suppliers/${supplier.id}/update` : '/suppliers' %>" method="POST">
+
+  <label>Name
+    <input type="text" name="name" required
+      value="<%= supplier ? supplier.name : '' %>">
+  </label>
+
+  <label>Email
+    <input type="email" name="email"
+      value="<%= supplier ? supplier.email : '' %>">
+  </label>
+
+  <label>Phone
+    <input type="text" name="phone"
+      value="<%= supplier ? supplier.phone : '' %>">
+  </label>
+
+  <button type="submit">
+    <%= supplier ? 'Save changes' : 'Create supplier' %>
+  </button>
+
+</form>
+
+<%- include('../partials/footer') %>
