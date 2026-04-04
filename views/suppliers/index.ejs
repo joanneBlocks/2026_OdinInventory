@@ -22,7 +22,14 @@
         </td>
         <td><%= supplier.email || '—' %></td>
         <td><%= supplier.phone || '—' %></td>
-        <td><a href="/suppliers/<%= supplier.id %>/edit">Edit</a></td>
+        <td>
+          <a href="/suppliers/<%= supplier.id %>/edit">Edit</a>
+          <form action="/suppliers/<%= supplier.id %>/delete" method="POST"
+            style="display:inline"
+            onsubmit="return confirm('Are you sure you want to delete <%= supplier.name %>?')">
+            <button type="submit">Delete</button>
+          </form>
+        </td>
       </tr>
     <% }) %>
   </tbody>
