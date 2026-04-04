@@ -1,0 +1,16 @@
+<%- include('../partials/header') %>
+
+<a href="/suppliers">&larr; Back</a>
+<h1><%= supplier.name %></h1>
+<p>Email: <%= supplier.email || '—' %></p>
+<p>Phone: <%= supplier.phone || '—' %></p>
+
+<div>
+  <a href="/suppliers/<%= supplier.id %>/edit">Edit</a>
+
+  <form action="/suppliers/<%= supplier.id %>/delete" method="POST">
+    <button type="submit">Delete</button>
+  </form>
+</div>
+
+<%- include('../partials/footer') %>
