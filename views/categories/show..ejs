@@ -1,0 +1,15 @@
+<%- include('../partials/header') %>
+
+<a href="/categories">&larr; Back</a>
+<h1><%= category.name %></h1>
+<p><%= category.description || 'No description.' %></p>
+
+<div>
+  <a href="/categories/<%= category.id %>/edit">Edit</a>
+
+  <form action="/categories/<%= category.id %>/delete" method="POST">
+    <button type="submit">Delete</button>
+  </form>
+</div>
+
+<%- include('../partials/footer') %>
