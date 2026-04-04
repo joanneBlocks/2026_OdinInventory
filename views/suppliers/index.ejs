@@ -1,0 +1,31 @@
+<%- include('../partials/header') %>
+
+<h1>Suppliers</h1>
+<a href="/suppliers/new">+ New supplier</a>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% suppliers.forEach(supplier => { %>
+      <tr>
+        <td>
+          <a href="/suppliers/<%= supplier.id %>">
+            <%= supplier.name %>
+          </a>
+        </td>
+        <td><%= supplier.email || '—' %></td>
+        <td><%= supplier.phone || '—' %></td>
+        <td><a href="/suppliers/<%= supplier.id %>/edit">Edit</a></td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>
+
+<%- include('../partials/footer') %>
