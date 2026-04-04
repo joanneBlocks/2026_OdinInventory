@@ -1,0 +1,29 @@
+<%- include('../partials/header') %>
+
+<a href="/items">&larr; Back</a>
+<h1><%= item.name %></h1>
+<p><%= item.description || 'No description.' %></p>
+
+<dl>
+  <dt>Price</dt>
+  <dd>$<%= item.price %></dd>
+
+  <dt>Stock</dt>
+  <dd><%= item.quantity %></dd>
+
+  <dt>Category</dt>
+  <dd><%= item.category_name || '—' %></dd>
+
+  <dt>Supplier</dt>
+  <dd><%= item.supplier_name || '—' %></dd>
+</dl>
+
+<div>
+  <a href="/items/<%= item.id %>/edit">Edit</a>
+
+  <form action="/items/<%= item.id %>/delete" method="POST">
+    <button type="submit">Delete</button>
+  </form>
+</div>
+
+<%- include('../partials/footer') %>
