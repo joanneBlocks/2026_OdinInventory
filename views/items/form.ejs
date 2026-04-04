@@ -1,0 +1,57 @@
+<%- include('../partials/header') %>
+
+<a href="/items">&larr; Back</a>
+<h1><%= item ? 'Edit item' : 'New item' %></h1>
+
+<form action="<%= item ? `/items/${item.id}/update` : '/items' %>" method="POST">
+
+  <label>Name
+    <input type="text" name="name" required
+      value="<%= item ? item.name : '' %>">
+  </label>
+
+  <label>Description
+    <textarea name="description"><%= item ? item.description : '' %></textarea>
+  </label>
+
+  <label>Price
+    <input type="number" name="price" step="0.01" min="0" required
+      value="<%= item ? item.price : '' %>">
+  </label>
+
+  <label>Quantity
+    <input type="number" name="quantity" min="0"
+      value="<%= item ? item.quantity : 0 %>">
+  </label>
+
+  <label>Category
+    <select name="category_id">
+      <option value="">— none —</option>
+      <% categories.forEach(c => { %>
+        <option value="<%= c.id %>"
+          <%= item && item.category_id == c.id ? 'selected' : '' %>>
+          <%= c.name %>
+        </option>
+      <% }) %>
+    </select>
+  </label>
+
+  <label>Supplier
+    <select name="supplier_id">
+      <option value="">— none —</option>
+      <% suppliers.forEach(s => { %>
+        <option value="<%= s.id %>"
+          <%= item && item.supplier_id == s.id ? 'selected' : '' %>>
+          <%= s.name %>
+        </option>
+      <% }) %>
+    </select>
+  </label>
+
+  <button type="submit">
+    <%= item ? 'Save changes' : 'Create item' %>
+  </button>
+
+</form>
+
+<%- include('../partials/footer') %>
