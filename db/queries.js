@@ -56,3 +56,29 @@ exports.getItemById = async (id) => {
   `, [id]);
   return rows[0];
 };
+
+// Create, update, delete categories
+exports.createCategory = async ({ name, description }) => {
+  await pool.query(
+    'INSERT INTO categories (name, description) VALUES ($1, $2)',
+    [name, description]
+  );
+};
+
+exports.updateCategory = async (id, { name, description }) => {
+  await pool.query(
+    'UPDATE categories SET name=$1, description=$2 WHERE id=$3',
+    [name, description, id]
+  );
+};
+
+exports.deleteCategory = async (id) => {
+  await pool.query('DELETE FROM categories WHERE id=$1', [id]);
+};
+
+exports.countItemsByCategory = async (id) => {
+  const { rows } = await pool.query(
+    'SELECT COUNT(*) FROM items WHERE category_id=$1', [id]
+  );
+  return parseInt(rows[0].count, 10);
+};
