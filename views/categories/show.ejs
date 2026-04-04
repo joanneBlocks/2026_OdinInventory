@@ -4,6 +4,10 @@
 <h1><%= category.name %></h1>
 <p><%= category.description || 'No description.' %></p>
 
+<% if (error) { %>
+  <p style="color: red;"><%= error %></p>
+<% } %>
+
 <div>
   <a href="/categories/<%= category.id %>/edit">Edit</a>
 
