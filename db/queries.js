@@ -82,3 +82,43 @@ exports.countItemsByCategory = async (id) => {
   );
   return parseInt(rows[0].count, 10);
 };
+
+// Create, update, delete suppliers
+exports.createSupplier = async ({ name, email, phone }) => {
+  await pool.query(
+    'INSERT INTO suppliers (name, email, phone) VALUES ($1, $2, $3)',
+    [name, email, phone]
+  );
+};
+
+exports.updateSupplier = async (id, { name, email, phone }) => {
+  await pool.query(
+    'UPDATE suppliers SET name=$1, email=$2, phone=$3 WHERE id=$4',
+    [name, email, phone, id]
+  );
+};
+
+exports.deleteSupplier = async (id) => {
+  await pool.query('DELETE FROM suppliers WHERE id=$1', [id]);
+};
+
+// Create, update, delete items
+exports.createItem = async ({ name, description, price, quantity, category_id, supplier_id }) => {
+  await pool.query(
+    `INSERT INTO items (name, description, price, quantity, category_id, supplier_id)
+     VALUES ($1, $2, $3, $4, $5, $6)`,
+    [name, description, price, quantity, category_id || null, supplier_id || null]
+  );
+};
+
+exports.updateItem = async (id, { name, description, price, quantity, category_id, supplier_id }) => {
+  await pool.query(
+    `UPDATE items SET name=$1, description=$2, price=$3,
+     quantity=$4, category_id=$5, supplier_id=$6 WHERE id=$7`,
+    [name, description, price, quantity, category_id || null, supplier_id || null, id]
+  );
+};
+
+exports.deleteItem = async (id) => {
+  await pool.query('DELETE FROM items WHERE id=$1', [id]);
+};
