@@ -1,57 +1,85 @@
 <%- include('../partials/header') %>
 
-<a href="/items">&larr; Back</a>
-<h1><%= item ? 'Edit item' : 'New item' %></h1>
+<div class="mb-6">
+  <a href="/items" class="text-sm text-gray-500 hover:text-gray-700 transition">&larr; Back to items</a>
+</div>
 
-<form action="<%= item ? `/items/${item.id}/update` : '/items' %>" method="POST">
+<div class="bg-white rounded-xl border border-gray-200 shadow-sm p-8 max-w-2xl mx-auto">  <h1 class="text-2xl font-semibold text-gray-900 mb-6">
+    <%= item ? 'Edit item' : 'New item' %>
+  </h1>
 
-  <label>Name
-    <input type="text" name="name" required
-      value="<%= item ? item.name : '' %>">
-  </label>
+  <form action="<%= item ? `/items/${item.id}/update` : '/items' %>" method="POST"
+        class="flex flex-col gap-5">
 
-  <label>Description
-    <textarea name="description"><%= item ? item.description : '' %></textarea>
-  </label>
+    <div>
+      <label class="block text-sm font-medium text-gray-700 mb-1">Name</label>
+      <input type="text" name="name" required
+        value="<%= item ? item.name : '' %>"
+        class="w-full border border-gray-200 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+    </div>
 
-  <label>Price
-    <input type="number" name="price" step="0.01" min="0" required
-      value="<%= item ? item.price : '' %>">
-  </label>
+    <div>
+      <label class="block text-sm font-medium text-gray-700 mb-1">Description</label>
+      <textarea name="description" rows="3"
+        class="w-full border border-gray-200 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"><%= item ? item.description : '' %></textarea>
+    </div>
 
-  <label>Quantity
-    <input type="number" name="quantity" min="0"
-      value="<%= item ? item.quantity : 0 %>">
-  </label>
+    <div class="grid grid-cols-2 gap-4">
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Price</label>
+        <input type="number" name="price" step="0.01" min="0" required
+          value="<%= item ? item.price : '' %>"
+          class="w-full border border-gray-200 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Quantity</label>
+        <input type="number" name="quantity" min="0"
+          value="<%= item ? item.quantity : 0 %>"
+          class="w-full border border-gray-200 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+      </div>
+    </div>
 
-  <label>Category
-    <select name="category_id">
-      <option value="">— none —</option>
-      <% categories.forEach(c => { %>
-        <option value="<%= c.id %>"
-          <%= item && item.category_id == c.id ? 'selected' : '' %>>
-          <%= c.name %>
-        </option>
-      <% }) %>
-    </select>
-  </label>
+    <div class="grid grid-cols-2 gap-4">
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Category</label>
+        <select name="category_id"
+          class="w-full border border-gray-200 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <option value="">— none —</option>
+          <% categories.forEach(c => { %>
+            <option value="<%= c.id %>"
+              <%= item && item.category_id == c.id ? 'selected' : '' %>>
+              <%= c.name %>
+            </option>
+          <% }) %>
+        </select>
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Supplier</label>
+        <select name="supplier_id"
+          class="w-full border border-gray-200 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <option value="">— none —</option>
+          <% suppliers.forEach(s => { %>
+            <option value="<%= s.id %>"
+              <%= item && item.supplier_id == s.id ? 'selected' : '' %>>
+              <%= s.name %>
+            </option>
+          <% }) %>
+        </select>
+      </div>
+    </div>
 
-  <label>Supplier
-    <select name="supplier_id">
-      <option value="">— none —</option>
-      <% suppliers.forEach(s => { %>
-        <option value="<%= s.id %>"
-          <%= item && item.supplier_id == s.id ? 'selected' : '' %>>
-          <%= s.name %>
-        </option>
-      <% }) %>
-    </select>
-  </label>
+    <div class="flex gap-3 pt-2">
+      <button type="submit"
+        class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium px-6 py-2 rounded-lg transition">
+        <%= item ? 'Save changes' : 'Create item' %>
+      </button>
+      <a href="/items"
+        class="text-sm font-medium px-6 py-2 rounded-lg border border-gray-200 hover:bg-gray-50 transition">
+        Cancel
+      </a>
+    </div>
 
-  <button type="submit">
-    <%= item ? 'Save changes' : 'Create item' %>
-  </button>
-
-</form>
+  </form>
+</div>
 
 <%- include('../partials/footer') %>
