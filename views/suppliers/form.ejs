@@ -33,15 +33,21 @@
         class="w-full border border-gray-200 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
     </div>
 
-    <div class="flex gap-3 pt-2">
-      <button type="submit"
-        class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium px-6 py-2 rounded-lg transition">
-        <%= supplier ? 'Save changes' : 'Create supplier' %>
-      </button>
-      <a href="/suppliers"
-        class="text-sm font-medium px-6 py-2 rounded-lg border border-gray-200 hover:bg-gray-50 transition">
-        Cancel
-      </a>
+    <div class="border-t border-gray-100 pt-5 mt-2">
+      <label class="block text-sm font-medium text-gray-700 mb-1">Admin password</label>
+      <input type="password" name="admin_password" required
+        placeholder="Required to save changes"
+        class="w-full border border-gray-200 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4">
+      <div class="flex gap-3">
+        <button type="submit"
+          class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium px-6 py-2 rounded-lg transition">
+          <%= supplier ? 'Save changes' : 'Create supplier' %>
+        </button>
+        <a href="/suppliers"
+          class="text-sm font-medium px-6 py-2 rounded-lg border border-gray-200 hover:bg-gray-50 transition">
+          Cancel
+        </a>
+      </div>
     </div>
 
   </form>
