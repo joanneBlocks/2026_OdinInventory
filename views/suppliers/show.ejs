@@ -1,16 +1,39 @@
 <%- include('../partials/header') %>
 
-<a href="/suppliers">&larr; Back</a>
-<h1><%= supplier.name %></h1>
-<p>Email: <%= supplier.email || '—' %></p>
-<p>Phone: <%= supplier.phone || '—' %></p>
+<div class="mb-6">
+  <a href="/suppliers" class="text-sm text-gray-500 hover:text-gray-700 transition">&larr; Back to suppliers</a>
+</div>
 
-<div>
-  <a href="/suppliers/<%= supplier.id %>/edit">Edit</a>
+<div class="bg-white rounded-xl border border-gray-200 shadow-sm p-8 max-w-2xl mx-auto">
+  <div class="flex items-start justify-between mb-6">
+    <div>
+      <h1 class="text-2xl font-semibold text-gray-900 mb-1"><%= supplier.name %></h1>
+    </div>
+    <div class="flex gap-3">
+      <a href="/suppliers/<%= supplier.id %>/edit"
+         class="text-sm font-medium px-4 py-2 rounded-lg border border-gray-200 hover:bg-gray-50 transition">
+        Edit
+      </a>
+      <form action="/suppliers/<%= supplier.id %>/delete" method="POST"
+        onsubmit="return confirm('Are you sure you want to delete <%= supplier.name %>?')">
+        <button type="submit"
+          class="text-sm font-medium px-4 py-2 rounded-lg border border-red-200 text-red-600 hover:bg-red-50 transition">
+          Delete
+        </button>
+      </form>
+    </div>
+  </div>
 
-  <form action="/suppliers/<%= supplier.id %>/delete" method="POST">
-    <button type="submit">Delete</button>
-  </form>
+  <div class="grid grid-cols-2 gap-4">
+    <div class="bg-gray-50 rounded-lg p-4">
+      <p class="text-xs text-gray-500 uppercase tracking-wide mb-1">Email</p>
+      <p class="text-sm font-medium text-gray-900"><%= supplier.email || '—' %></p>
+    </div>
+    <div class="bg-gray-50 rounded-lg p-4">
+      <p class="text-xs text-gray-500 uppercase tracking-wide mb-1">Phone</p>
+      <p class="text-sm font-medium text-gray-900"><%= supplier.phone || '—' %></p>
+    </div>
+  </div>
 </div>
 
 <%- include('../partials/footer') %>
