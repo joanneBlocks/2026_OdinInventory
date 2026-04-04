@@ -29,3 +29,30 @@ exports.getSupplierById = async (id) => {
   );
   return rows[0];
 };
+
+// Items
+exports.getAllItems = async () => {
+  const { rows } = await pool.query(`
+    SELECT i.*, 
+           c.name AS category_name,
+           s.name AS supplier_name
+    FROM items i
+    LEFT JOIN categories c ON i.category_id = c.id
+    LEFT JOIN suppliers s  ON i.supplier_id = s.id
+    ORDER BY i.created_at DESC
+  `);
+  return rows;
+};
+
+exports.getItemById = async (id) => {
+  const { rows } = await pool.query(`
+    SELECT i.*, 
+           c.name AS category_name,
+           s.name AS supplier_name
+    FROM items i
+    LEFT JOIN categories c ON i.category_id = c.id
+    LEFT JOIN suppliers s  ON i.supplier_id = s.id
+    WHERE i.id = $1
+  `, [id]);
+  return rows[0];
+};
