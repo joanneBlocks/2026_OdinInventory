@@ -1,0 +1,23 @@
+<%- include('../partials/header') %>
+
+<a href="/categories">&larr; Back</a>
+<h1><%= category ? 'Edit category' : 'New category' %></h1>
+
+<form action="<%= category ? `/categories/${category.id}/update` : '/categories' %>" method="POST">
+
+  <label>Name
+    <input type="text" name="name" required
+      value="<%= category ? category.name : '' %>">
+  </label>
+
+  <label>Description
+    <textarea name="description"><%= category ? category.description : '' %></textarea>
+  </label>
+
+  <button type="submit">
+    <%= category ? 'Save changes' : 'Create category' %>
+  </button>
+
+</form>
+
+<%- include('../partials/footer') %>
